@@ -1,0 +1,28 @@
+$ docker login
+
+$ docker tag spring-boot-docker:latest <username>/spring-boot-docker:latest
+
+$ docker push <username>/spring-boot-docker:latest
+
+$ docker pull <username>/spring-boot-docker:0.0.1
+
+$ docker run -d -p 8080:80 abbey477/demo-react-prod-image:0.0.1 nginx -g 'daemon off;'
+
+=====================================================================================
+
+ssh -i "aws-hecams-feb-05-2022.pem" ubuntu@ec2-3-142-241-127.us-east-2.compute.amazonaws.com
+
+==================================================================================================================================
+Copying files from local to EC2
+
+scp -i /directory/to/abc.pem /your/local/file/to/copy user@ec2-xx-xx-xxx-xxx.compute-1.amazonaws.com:path/to/file
+
+scp -i ~/.ssh/aws-hecams-feb-05-2022.pem  ~/credentials.csv  ubuntu@ec2-3-142-241-127.us-east-2.compute.amazonaws.com:"~/xfer"
+
+===================================================================================================================================
+
+Copying files from EC2 to local
+
+scp -i /directory/to/abc.pem user@ec2-xx-xx-xxx-xxx.compute-1.amazonaws.com:path/to/file    /your/local/directory/files/to/download
+    
+===============================================================================================================================

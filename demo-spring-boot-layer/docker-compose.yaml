@@ -3,7 +3,7 @@ version: '3.9'
 services:
   springboot-layer:
     container_name: springbootlayer-container
-    image: "demo/springbootlayer:0.0.1"
+    image: "demo-springbootlayer:0.0.1"
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,3 +12,4 @@ services:
 
 # docker-compose up -d --build
 # docker-compose build
+# docker-compose up -d

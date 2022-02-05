@@ -1,0 +1,43 @@
+ yarn create react-app my-app
+ 
+ yarn add react-router-dom@6
+ 
+ npm install react-router-dom@6
+ 
+ --------------------===============================================================================
+ 
+ yarn start
+    Starts the development server.
+
+  yarn build
+    Bundles the app into static files for production.
+
+  yarn test
+    Starts the test runner.
+
+  yarn eject
+    Removes this tool and copies build dependencies, configuration files
+    and scripts into the app directory. If you do this, you can’t go back!
+======================================================================================================
+
+Delete Docker Image:
+docker image rm <image-name>
+
+Build Docker Image : 
+docker build -t hecams-ui-img .
+
+Delete Docker Container:
+docker rm <container name> -f
+docker stop <container name>
+
+Build Docker Container :
+docker run -d -p 3000:3000 --name hecams-ui-cnt  hecams-ui-img
+
+Connect to file fileSystem:
+docker exec -it <container name> bash
+
+Volume:
+-v {pwd}/src:/app/src:ro
+
+Add Environmental variable:
+--env-file ./.env

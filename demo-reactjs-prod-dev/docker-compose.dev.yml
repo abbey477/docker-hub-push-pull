@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: demo-react-dev-ctn
+    image: demo-react-dev-image:0.0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 3000:3000

@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: demo-react-prod-ctn
+    image: demo-react-prod-image:0.0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
