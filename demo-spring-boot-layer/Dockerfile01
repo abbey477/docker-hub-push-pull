@@ -1,0 +1,15 @@
+# docker build -t bootdocker:1 .
+# docker run -d --name bootdocker -p 8080:8080 bootdocker:1
+
+FROM openjdk:18-jdk-alpine3.15
+VOLUME /tmp
+COPY target/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
+
+
+# docker build -f Dockerfile01 -t solucreed/appdemo01:0.0.1 .
+# docker run -p 8080:8080 myorg/myapp
+# docker run -ti --entrypoint /bin/sh myorg/myapp
+
+# docker run --name myapp -ti --entrypoint /bin/sh myorg/myapp
+# docker exec -ti myapp /bin/sh

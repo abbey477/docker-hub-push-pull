@@ -1,0 +1,47 @@
+
+Build Docker Image
+Here, -t simply means tag followed by ‘ name:tag ’ format.
+$ docker build -t image-name:tag-number .
+
+Run Docker container using the image built
+$ docker run -d --name bootdocker -p 8080:8080 image-name:tag-number
+
+Maven
+docker build -f Dockerfile01 --build-arg JAR_FILE=target/*.jar -t solucreed/appdemo .
+
+Gradle
+docker build --build-arg JAR_FILE=build/libs/*.jar -t myorg/myapp .
+
+===========================================================================================================
+
+FROM openjdk:18-jdk-alpine3.15 as builder
+WORKDIR application
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} application.jar
+RUN java -Djarmode=layertools -jar application.jar extract
+
+FROM openjdk:18-jdk-alpine3.15
+WORKDIR application
+COPY --from=builder application/dependencies/ ./
+COPY --from=builder application/spring-boot-loader/ ./
+COPY --from=builder application/snapshot-dependencies/ ./
+COPY --from=builder application/application/ ./
+ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+
+# docker build -f Dockerfile00 -t solucreed/appdemo00:0.0.1 .
+# https://springframework.guru/why-you-should-be-using-spring-boot-docker-layers/
+# java -Djarmode=layertools -jar target/*.jar list
+
+# $ docker-compose up -d --build
+
+===============================================================================================================
+
+FROM openjdk:8-jdk-alpine
+VOLUME /tmp
+ARG APP=target/extracted
+COPY ${APP}/BOOT-INF/lib /app/lib
+COPY ${APP}/META-INF /app/META-INF
+COPY ${APP}/BOOT-INF/classes /app
+ENTRYPOINT ["java", "-cp", "app:app/lib/*", "-Dspring.profiles.active=container", "com.slmanju.springbootdocker.SpringBootDockerApplication"]
+
+==========================================================================================================================================
